@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+<div class="panel panel-default">
+  <div class="panel-heading">Employee Form</div>
+  <div class="panel-body">
+   <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+     <div class="form-group">
+<label> FullName </label>
+<input type="text" class="form-control" formControlName="name">
+       <small *ngIf="!myForm.controls.name.valid && myForm.controls.name.touched" class="text-danger">
+              FullName is required and should be of min length 3.
+            </small>
+</div>
+<!--<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>-->
+
+<div formArrayName="addresses">
+  <div class="panel panel-default" *ngFor="let address of myForm.controls.addresses.controls; let i=index">
+<div class="panel-heading">Address {{i + 1}}
+  <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
+
+</div>
+<div class="panel-body" [formGroupName]="i">
+      <app-address [group]="myForm.controls.addresses.controls[i]"> </app-address>
+</div>
+</div>
+  </div>
+
+  <div>
+<a style="cursor:mouse-pointer" (click)="addAddress()">
+Add another address +
+  </a>
+   <div>
+       <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
+   </div>
+  </div>
+    
+    <div class="margin-20">
+          <div>myForm details:-</div>
+          <pre>Is myForm valid?: <br>{{myForm.valid | json}}</pre>
+          <pre>form value: <br>{{myForm.value | json}}</pre>
+        </div>
+     </form>
+  </div>
+</div>
+</div>
+</div>
