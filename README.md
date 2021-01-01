@@ -1,1 +1,2 @@
-# Dynamic Form in Angular2
+# Overview
+This project demonstrate how to dynamically add controls in Angular.
